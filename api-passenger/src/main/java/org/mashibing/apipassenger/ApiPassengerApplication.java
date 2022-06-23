@@ -2,6 +2,7 @@ package org.mashibing.apipassenger;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
  * @author 杨思远
@@ -11,6 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @description
  */
 @SpringBootApplication
+@EnableDiscoveryClient
 public class ApiPassengerApplication {
 
     public static void main(String[] args) {
