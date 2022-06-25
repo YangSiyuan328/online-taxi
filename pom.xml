@@ -16,6 +16,7 @@
   <modules>
     <module>api-passenger</module>
     <module>service-verificationcode</module>
+    <module>internal-common</module>
   </modules>
 
   <packaging>pom</packaging>
@@ -30,6 +31,15 @@
       <groupId>com.alibaba</groupId>
       <artifactId>fastjson</artifactId>
       <version>1.2.28</version>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.mashibing</groupId>
+      <artifactId>internal-common</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
     </dependency>
   </dependencies>
 

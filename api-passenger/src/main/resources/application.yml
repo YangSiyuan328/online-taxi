@@ -1,5 +1,6 @@
 server:
   port: 9091
+
 spring:
   cloud:
     nacos:
