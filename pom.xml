@@ -10,11 +10,12 @@
     <version>2.4.13</version>
   </parent>
 
-  <groupId>org.mashibing</groupId>
+  <groupId>com.mashibing</groupId>
   <artifactId>online-taxi</artifactId>
   <version>1.0-SNAPSHOT</version>
   <modules>
     <module>api-passenger</module>
+    <module>service-verificationcode</module>
   </modules>
 
   <packaging>pom</packaging>
