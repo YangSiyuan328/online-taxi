@@ -1,5 +1,7 @@
 package org.mashibing.apipassenger.request;
 
+import lombok.Data;
+
 /**
  * @author 杨思远
  * @version 1.0
@@ -7,15 +9,11 @@ package org.mashibing.apipassenger.request;
  * @date 2022/6/23 21:48
  * @description
  */
+@Data
 public class VerificationCodeDTO {
 
-    private String passagePhone;
+    private String passengerPhone;
 
-    public String getPassagePhone() {
-        return passagePhone;
-    }
+    private String verificationCode;
 
-    public void setPassagePhone(String passagePhone) {
-        this.passagePhone = passagePhone;
-    }
 }
