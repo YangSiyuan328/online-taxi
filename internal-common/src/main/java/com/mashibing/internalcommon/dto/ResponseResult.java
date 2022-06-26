@@ -21,6 +21,15 @@ public class ResponseResult<T> {
 
     /**
      * 成功响应的方法
+     * @return
+     * @param <T>
+     */
+    public static <T> ResponseResult<T> success() {
+        return new ResponseResult<T>().setCode(CommonStatusEnum.SUCCESS.getCode()).setMessage(CommonStatusEnum.SUCCESS.getValue());
+    }
+
+    /**
+     * 成功响应的方法
      * @param data
      * @return
      * @param <T>

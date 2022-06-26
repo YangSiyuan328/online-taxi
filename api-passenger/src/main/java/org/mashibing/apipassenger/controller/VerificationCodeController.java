@@ -1,5 +1,6 @@
 package org.mashibing.apipassenger.controller;
 
+import com.mashibing.internalcommon.dto.ResponseResult;
 import org.mashibing.apipassenger.request.VerificationCodeDTO;
 import org.mashibing.apipassenger.service.VerificationCodeService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,9 +23,8 @@ public class VerificationCodeController {
     private VerificationCodeService verificationCodeService;
 
     @GetMapping("/verification-code")
-    public String verificationCode(@RequestBody VerificationCodeDTO verificationCodeDTO) {
+    public ResponseResult verificationCode(@RequestBody VerificationCodeDTO verificationCodeDTO) {
         String passagePhone = verificationCodeDTO.getPassagePhone();
-        System.out.println("接收到的手机号为：" + passagePhone);
         return verificationCodeService.generatorCode(passagePhone);
     }
 
