@@ -33,10 +33,11 @@ public class VerificationCodeService {
 
     /**
      * 生成验证码
-     * @param passengerCode 手机号
+     *
+     * @param passengerPhone 手机号
      * @return
      */
-    public ResponseResult generatorCode(String passengerCode) {
+    public ResponseResult generatorCode(String passengerPhone) {
         // 调用验证码服务，获取验证码
 
         ResponseResult<NumberCodeResponse> numberCodeResponse = serviceVerificationcodeClient.getNumberCode(6);
@@ -44,7 +45,7 @@ public class VerificationCodeService {
 
         // 存入 redis
         // key,value,过期时间
-        String key = verificationCodePrefix + passengerCode;
+        String key = generatorKeyByPhone(passengerPhone);
         // 存入 redis
         stringRedisTemplate.opsForValue().set(key, String.valueOf(numberCode), 2, TimeUnit.MINUTES);
 
@@ -53,15 +54,27 @@ public class VerificationCodeService {
         return ResponseResult.success("");
     }
 
+    private String generatorKeyByPhone(String passengerCode) {
+        return verificationCodePrefix + passengerCode;
+    }
+
     /**
      * 校验验证码
-     * @param passengerCode 手机号
+     *
+     * @param passengerCode    手机号
      * @param verificationCode 验证码
      * @return
      */
     public ResponseResult checkCode(String passengerCode, String verificationCode) {
         // 根据手机号，去 redis 读取验证码
         System.out.println("据手机号，去 redis 读取验证码");
+
+        // 生成 key
+        String key = generatorKeyByPhone(passengerCode);
+
+        // 根据生成的 key 获取 value
+        String codeRedis = stringRedisTemplate.opsForValue().get(key);
+        System.out.println("redis中的key：" + codeRedis);
 
         // 校验验证码
         System.out.println("校验验证码");
