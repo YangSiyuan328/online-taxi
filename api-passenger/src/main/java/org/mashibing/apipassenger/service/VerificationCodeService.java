@@ -24,9 +24,9 @@ public class VerificationCodeService {
         // 调用验证码服务，获取验证码
         System.out.println("调用验证码服务，获取验证码");
 
-        ResponseResult<NumberCodeResponse> numberCodeResponse = serviceVerificationcodeClient.getNumberCode();
+        ResponseResult<NumberCodeResponse> numberCodeResponse = serviceVerificationcodeClient.getNumberCode(6);
         int numberCode = numberCodeResponse.getData().getNumberCode();
-        System.out.println("remote number code:" + numberCode);
+        // System.out.println("remote number code:" + numberCode);
 
         // 存入 redis
         System.out.println("存入 redis");
