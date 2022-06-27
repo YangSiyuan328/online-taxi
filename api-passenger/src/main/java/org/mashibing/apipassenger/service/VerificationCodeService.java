@@ -1,11 +1,11 @@
 package org.mashibing.apipassenger.service;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.nacos.common.utils.StringUtils;
+import com.mashibing.internalcommon.constant.CommonStatusEnum;
 import com.mashibing.internalcommon.dto.ResponseResult;
 import com.mashibing.internalcommon.response.NumberCodeResponse;
 import com.mashibing.internalcommon.response.TokenResponse;
 import org.mashibing.apipassenger.remote.ServiceVerificationcodeClient;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
@@ -67,8 +67,6 @@ public class VerificationCodeService {
      */
     public ResponseResult checkCode(String passengerCode, String verificationCode) {
         // 根据手机号，去 redis 读取验证码
-        System.out.println("据手机号，去 redis 读取验证码");
-
         // 生成 key
         String key = generatorKeyByPhone(passengerCode);
 
@@ -77,7 +75,12 @@ public class VerificationCodeService {
         System.out.println("redis中的key：" + codeRedis);
 
         // 校验验证码
-        System.out.println("校验验证码");
+        if (StringUtils.isBlank(codeRedis)) {
+            return ResponseResult.fail(CommonStatusEnum.VERIFICATION_CODE_ERROR.getCode(), CommonStatusEnum.VERIFICATION_CODE_ERROR.getValue());
+        }
+        if (!verificationCode.trim().equals(codeRedis.trim())) {
+            return ResponseResult.fail(CommonStatusEnum.VERIFICATION_CODE_ERROR.getCode(), CommonStatusEnum.VERIFICATION_CODE_ERROR.getValue());
+        }
 
         // 判断原来是否有用户，并进行对应的处理
         System.out.println("判断原来是否有用户，并进行对应的处理");
