@@ -26,7 +26,7 @@ public class UserService {
     @Resource
     private PassengerUserMapper passengerUserMapper;
 
-    public ResponseResult loginOrRegister(String passengerPhone){
+    public ResponseResult loginOrRegister(String passengerPhone) {
         System.out.println("UserService" + passengerPhone);
 
         // 根据手机号查询业务信息
@@ -35,7 +35,7 @@ public class UserService {
         List<PassengerUser> passengerUsers = passengerUserMapper.selectByMap(map);
 
         // 判断用户信息是否存在
-        if (passengerUsers.size() == 0){
+        if (passengerUsers.size() == 0) {
             // 如果不存在 插入用户信息
             PassengerUser passengerUser = new PassengerUser();
             passengerUser.setPassengerName("张三");
