@@ -5,6 +5,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import java.util.Arrays;
+
 /**
  * @author 杨思远
  * @version 1.0
@@ -21,6 +23,6 @@ public class InterceptorConfig implements WebMvcConfigurer {
                 // 拦截的路径
                 .addPathPatterns("/**")
                 // 不拦截的路径
-                .excludePathPatterns("/noAuthTest");
+                .excludePathPatterns(Arrays.asList("/noAuthTest","/verification-code","/verification-code-check"));
     }
 }
