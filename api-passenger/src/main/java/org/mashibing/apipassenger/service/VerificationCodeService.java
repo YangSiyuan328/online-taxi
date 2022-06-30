@@ -2,10 +2,12 @@ package org.mashibing.apipassenger.service;
 
 import com.alibaba.nacos.common.utils.StringUtils;
 import com.mashibing.internalcommon.constant.CommonStatusEnum;
+import com.mashibing.internalcommon.constant.IdentityConstant;
 import com.mashibing.internalcommon.dto.ResponseResult;
 import com.mashibing.internalcommon.request.VerificationCodeDTO;
 import com.mashibing.internalcommon.response.NumberCodeResponse;
 import com.mashibing.internalcommon.response.TokenResponse;
+import com.mashibing.internalcommon.util.JwtUtils;
 import org.mashibing.apipassenger.remote.ServicePassengerUserClient;
 import org.mashibing.apipassenger.remote.ServiceVerificationcodeClient;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -66,14 +68,14 @@ public class VerificationCodeService {
     /**
      * 校验验证码
      *
-     * @param passengerCode    手机号
+     * @param passengerPhone    手机号
      * @param verificationCode 验证码
      * @return
      */
-    public ResponseResult checkCode(String passengerCode, String verificationCode) {
+    public ResponseResult checkCode(String passengerPhone, String verificationCode) {
         // 根据手机号，去 redis 读取验证码
         // 生成 key
-        String key = generatorKeyByPhone(passengerCode);
+        String key = generatorKeyByPhone(passengerPhone);
 
         // 根据生成的 key 获取 value
         String codeRedis = stringRedisTemplate.opsForValue().get(key);
@@ -91,15 +93,15 @@ public class VerificationCodeService {
 
         // 判断原来是否有用户，并进行对应的处理，进行远程服务的调用
         VerificationCodeDTO verificationCodeDTO = new VerificationCodeDTO();
-        verificationCodeDTO.setPassengerPhone(passengerCode);
+        verificationCodeDTO.setPassengerPhone(passengerPhone);
         passengerUserClient.loginOrRegister(verificationCodeDTO);
 
-        // 颁发令牌
-        System.out.println("颁发令牌");
+        // 颁发令牌，不应该使用魔法值，要用枚举
+        String token = JwtUtils.generateToken(passengerPhone, IdentityConstant.PASSENGER_IDENTITY);
 
         // 响应
         TokenResponse tokenResponse = new TokenResponse();
-        tokenResponse.setToken("token value");
+        tokenResponse.setToken(token);
 
         return ResponseResult.success(tokenResponse);
     }
