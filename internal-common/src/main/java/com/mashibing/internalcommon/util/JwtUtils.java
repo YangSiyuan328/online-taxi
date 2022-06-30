@@ -70,4 +70,8 @@ public class JwtUtils {
         return tokenResult;
     }
 
+    public static void main(String[] args) {
+        String s = generateToken("18183158825", "1");
+        System.out.println(s);
+    }
 }

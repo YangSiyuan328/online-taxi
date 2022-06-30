@@ -45,7 +45,7 @@ public class ResponseResult<T> {
      * @param <T>
      */
     public static <T> ResponseResult<T> fail(T data) {
-        return new ResponseResult<T>().setData(data);
+        return new ResponseResult<T>().setData(data).setMessage("");
     }
 
 
