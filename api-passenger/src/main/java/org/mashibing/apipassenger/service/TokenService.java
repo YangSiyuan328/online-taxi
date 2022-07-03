@@ -10,6 +10,7 @@ import com.mashibing.internalcommon.response.TokenResponse;
 import com.mashibing.internalcommon.util.JwtUtils;
 import com.mashibing.internalcommon.util.RedisPrefixUtils;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.concurrent.TimeUnit;
@@ -21,6 +22,7 @@ import java.util.concurrent.TimeUnit;
  * @date 2022/7/3 15:27
  * @description
  */
+@Service
 public class TokenService {
 
     @Resource
