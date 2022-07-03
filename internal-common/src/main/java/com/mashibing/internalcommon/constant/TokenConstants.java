@@ -7,7 +7,7 @@ package com.mashibing.internalcommon.constant;
  * @date 2022/7/1 17:57
  * @description
  */
-public class TokenConstant {
+public class TokenConstants {
 
     public static final String ACCESS_TOKEN_TYPE = "accessToken";
 
