@@ -83,8 +83,8 @@ public class VerificationCodeService {
         if (!verificationCode.trim().equals(codeRedis.trim())) {
             return ResponseResult.fail(CommonStatusEnum.VERIFICATION_CODE_ERROR.getCode(), CommonStatusEnum.VERIFICATION_CODE_ERROR.getValue());
         }
-        // 登录成功后移除验证码
-        stringRedisTemplate.delete(key);
+        // 登录成功后移除验证码 为了测试方便，可以先存入一个永久验证码，并且不删除
+        // stringRedisTemplate.delete(key);
 
         // 判断原来是否有用户，并进行对应的处理，进行远程服务的调用
         VerificationCodeDTO verificationCodeDTO = new VerificationCodeDTO();
